@@ -1,0 +1,56 @@
+<parkinglot roadWidth="50px" name="一层">
+	<vLayout>
+		<hLayout>
+			<space length="155"/>
+			<boundary length="585" direction="horizontal" />
+		</hLayout>
+		<hLayout>
+			<space length="100"/>
+			<boundary length="50" direction="vertical" />
+			<road length="50" direction="vertical" action="exit" actionPos="1"/>
+			<road length="585" direction="horizontal" action="entry" actionPos="2"/>
+		</hLayout>
+		<hLayout>
+			<boundary length="105" direction="horizontal" />
+			<space length="50" />
+			<boundary length="585" direction="horizontal" />
+		</hLayout>
+		<hLayout>
+			<road length="730" direction="horizontal" action="stair" actionPos="1"/>
+			<space length="5" />
+			<boundary length="55" direction="vertical" />
+		</hLayout>
+		<hLayout>
+			<boundary length="520" direction="vertical" />
+			<road length="520" direction="vertical" />
+			<room number="13" direction="W" expendDirection="down"/>
+			<room number="13" direction="E" expendDirection="down"/>
+			<road length="520" direction="vertical" />
+			<room number="13" direction="W" expendDirection="down"/>
+			<room number="13" direction="E" expendDirection="down"/>
+			<road length="520" direction="vertical" />
+			<room number="13" direction="W" expendDirection="down"/>
+			<room number="13" direction="E" expendDirection="down"/>
+			<road length="520" direction="vertical" />
+			<room number="13" direction="W" expendDirection="down"/>
+			<room number="13" direction="E" expendDirection="down"/>
+			<road length="520" direction="vertical" />
+			<boundary length="520" direction="vertical" />
+		</hLayout>
+		<hLayout>
+			<boundary length="55" direction="vertical" />
+			<road length="730" direction="horizontal" action="stair" actionPos="2"/>
+		</hLayout>
+		<hLayout>
+			<boundary length="585" direction="horizontal" />
+			<space length="50" />
+			<boundary length="105" direction="horizontal" />
+		</hLayout>
+		<hLayout>
+			<road length="585" direction="horizontal" action="entry" actionPos="1"/>
+			<road length="50" direction="vertical" action="exit" actionPos="2"/>
+			<boundary length="50" direction="vertical" />
+		</hLayout>
+		<boundary length="585" direction="horizontal" />
+	</vLayout>
+</parkinglot>

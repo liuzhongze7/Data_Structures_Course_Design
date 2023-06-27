@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>T5.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="t5-banking-bussinese">T5. Banking Bussinese</h2>
+<p>[toc]</p>
+<h3 id="analysis">Analysis</h3>
+<h4 id="question-background">question background</h4>
+<p>Queue is a common thing in our daily life. Banking bussinese is a good example: the number of waiting people is much bigger than the number of windows. In order to ensure fairness, we ought to follow FIFO(First-in-First-out) principle, and that's the reason why we nees to use queue to solve lining-up problems.</p>
+<p>In addition, the efficiency of each window is totally diffrent, by using queue, we can realize better scheduling, which will reduce the waiting time.</p>
+<h4 id="functional-analysis">functional analysis</h4>
+<p>To realize the specific queue solution, we need firstly eastablish queue structure. Importing from STL is a way, but building up our own queue structure is much better.</p>
+<p>The <code>Queue</code> class <strong>at least</strong> need to own these two functions: <code>EnQueue()</code>, <code>DeQueue()</code>, and two member variables: <code>*head</code> and <code>*tail</code>.</p>
+<p>Here are the details.</p>
+<br>
+<h3 id="design">Design</h3>
+<h4 id="data-structure-design">data structure design</h4>
+<p>This question shows that <code>N &lt;= 1000</code>, using array to deal with this problem is kind of awkward. And it will involve a lot of insert and delete operations. So using linked list is a better choice.</p>
+<p>And as usual, an extra head node is added, which will make manipulation functions more concise.
+<br></p>
+<h4 id="class-structure-and-system-design">class structure and system design</h4>
+<p>Before designing the <code>Queue</code> class, it's essential to definit a node structure, since it doesn't contains many factors, using <code>struct Node</code> is enough.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Node */</span>
+<span class="hljs-comment">// generalization is not not a must</span>
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> {</span>
+  <span class="hljs-comment">// constructor with no parameter</span>
+    Node(Node&lt;T&gt;* ptr = <span class="hljs-literal">NULL</span>) { next = ptr; }
+  <span class="hljs-comment">// constructor overload</span>
+    Node(<span class="hljs-keyword">const</span> T&amp; d, Node&lt;T&gt;* ptr = <span class="hljs-literal">NULL</span>) { data = d; next = ptr; }
+  <span class="hljs-comment">// two member variables</span>
+    T data;
+    Node&lt;T&gt;* next;
+};
+</div></code></pre>
+<p>Then the <code>Queue</code> class:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* Queue */</span>
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Queue</span>
+{</span>
+<span class="hljs-keyword">public</span>:
+    Queue() {
+        head = <span class="hljs-keyword">new</span> Node&lt;T&gt;();
+        tail = head;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EnQueue</span><span class="hljs-params">(T d)</span></span>;
+    <span class="hljs-function">T <span class="hljs-title">DeQueue</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> head == tail; }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>;
+<span class="hljs-keyword">private</span>:
+    Node&lt;T&gt;* head;
+    Node&lt;T&gt;* tail;
+};
+</div></code></pre>
+<p>In core system, I decide to use costom <code>IstreamFun()</code> and <code>OstreamFun()</code>, the former is to convert the input to two queues(queueA and queueB),  the latter will receive these two queues, do come calculates and output the result.</p>
+<p>In order to make <code>IstreamFun()</code> function be able to return two queues, I add another structure(named <code>TwoQueues</code>) to reserve two queues.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* TwoQueues */</span>
+<span class="hljs-comment">// it's quite simple</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TwoQueues</span> {</span>
+    Queue&lt;<span class="hljs-keyword">int</span>&gt; a;
+    Queue&lt;<span class="hljs-keyword">int</span>&gt; b;
+};
+</div></code></pre>
+<p>So the final structure is this:</p>
+<center>
+    <img src="../pictures/T5_class.jpg" width="28%">
+</center>
+<h4 id="operation-design">operation design</h4>
+<p><code>Node</code></p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Node constructor</span>
+Node(Node&lt;T&gt;* ptr = <span class="hljs-literal">NULL</span>) { next = ptr; }
+<span class="hljs-comment">// overload constructor</span>
+Node(<span class="hljs-keyword">const</span> T&amp; d, Node&lt;T&gt;* ptr = <span class="hljs-literal">NULL</span>) { data = d; next = ptr; }
+<span class="hljs-comment">// data means the number that queue saved</span>
+T data;
+<span class="hljs-comment">// *next point, link to the next element</span>
+Node&lt;T&gt;* next;
+</div></code></pre>
+<br>
+<p><code>Queue</code></p>
+<pre class="hljs"><code><div><span class="hljs-comment">/* public members */</span>
+<span class="hljs-comment">// constructor</span>
+Queue() {
+    head = <span class="hljs-keyword">new</span> Node&lt;T&gt;();
+    tail = head;
+}
+<span class="hljs-comment">// destructor</span>
+~Queue();
+<span class="hljs-comment">// enqueue operation, the node will be insert to the tail</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EnQueue</span><span class="hljs-params">(T d)</span></span>;
+<span class="hljs-comment">// dequeue operation, the first node will be poped out</span>
+<span class="hljs-function">T <span class="hljs-title">DeQueue</span><span class="hljs-params">()</span></span>;
+<span class="hljs-comment">// determine if it's empty</span>
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> head == tail; }
+<span class="hljs-comment">// output the queue according to the format</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>;
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">/* private members */</span>
+<span class="hljs-comment">// the head pointer, pointing to a blank node, head-&gt;next is the first item</span>
+Node&lt;T&gt;* head;
+<span class="hljs-comment">// the tail pointer, pointing to the last node</span>
+Node&lt;T&gt;* tail;
+</div></code></pre>
+<br>
+<h4 id="systematic-design">systematic design</h4>
+<p>The systematic core functions are these:</p>
+<pre class="hljs"><code><div><span class="hljs-function">TwoQueues <span class="hljs-title">IstreamFun</span><span class="hljs-params">()</span>
+<span class="hljs-keyword">void</span> <span class="hljs-title">OstreamFun</span><span class="hljs-params">(TwoQueues tq)</span>
+</span></div></code></pre>
+<br>
+<h3 id="realization">Realization</h3>
+<h4 id="enqueue">Enqueue()</h4>
+<p>enqueue operation is quite simple, just make the new node to be the next node of tail pointer.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;
+<span class="hljs-keyword">void</span> Queue&lt;T&gt;::EnQueue(T d)
+{
+	Node&lt;T&gt;* item = <span class="hljs-keyword">new</span> Node&lt;T&gt;(d);
+	tail-&gt;next = item;
+	item-&gt;next = <span class="hljs-literal">NULL</span>;
+	tail = item;
+}
+</div></code></pre>
+<br>
+<h4 id="dequeue">Dequeue()</h4>
+<p>Dequeue operation is a little complex than enqueue, firstly it need to judge whether the queue is empty, then the circumstance that the queue only has one element.</p>
+<center>
+    <img src="../pictures/T5_dequeue.png" width="70%">
+</center>
+<pre class="hljs"><code><div><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;
+T Queue&lt;T&gt;::DeQueue()
+{
+	<span class="hljs-keyword">if</span> (head == tail) {
+		<span class="hljs-built_in">cerr</span>&lt;&lt;<span class="hljs-string">"队列没有数据，不能出队！"</span>;
+		<span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+	}
+	Node&lt;T&gt;* item = head-&gt;next;
+	<span class="hljs-comment">// only one element in the queue</span>
+	<span class="hljs-keyword">if</span> (head-&gt;next == tail) {
+		head-&gt;next = <span class="hljs-literal">NULL</span>;
+		tail = head;
+	}
+	<span class="hljs-keyword">else</span> {
+		head-&gt;next = item-&gt;next;
+	}
+	<span class="hljs-keyword">return</span> item-&gt;data;
+}
+</div></code></pre>
+<br>
+<p><code>print()</code></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;
+<span class="hljs-keyword">void</span> Queue&lt;T&gt;::<span class="hljs-built_in">print</span>()
+{
+	Node&lt;T&gt;* item = head-&gt;next;
+	<span class="hljs-keyword">while</span> (item-&gt;next != <span class="hljs-literal">NULL</span>) {
+		<span class="hljs-built_in">cout</span> &lt;&lt; item-&gt;data &lt;&lt; <span class="hljs-string">" "</span>;
+		item = item-&gt;next;
+	}
+	<span class="hljs-comment">// avoid the last blank</span>
+	<span class="hljs-built_in">cout</span> &lt;&lt; item-&gt;data;
+}
+</div></code></pre>
+<br>
+<h4 id="istreamfun">IstreamFun</h4>
+<p>IstreamFun() is used to transport input message to the queue. In this function, it returns a structure <code>TwoQueues</code>, in order to storing two queues by calling one function.</p>
+<p>And it use <code>regex_match</code> to judge whether the input string is a int type or not. If it's not a figure, it will trigger an alert message and exit(1).</p>
+<center>
+    <img src="../pictures/T5_istreamfun.png" width="80%">
+</center>
+<pre class="hljs"><code><div><span class="hljs-function">TwoQueues <span class="hljs-title">IstreamFun</span><span class="hljs-params">()</span>
+</span>{
+	TwoQueues tq;
+	Queue&lt;<span class="hljs-keyword">int</span>&gt; qA, qB;
+	<span class="hljs-built_in">string</span> num_str, id_str;
+	<span class="hljs-keyword">int</span> num, id;
+	<span class="hljs-built_in">cin</span> &gt;&gt; num_str;<span class="hljs-function">mdp
+	<span class="hljs-title">if</span> <span class="hljs-params">(!regex_match(num_str, int_type))</span> </span>{
+		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"第一个数请输入正整数！"</span>;
+		<span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+	}
+	num = stoi(num_str);
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; num; i++) {
+		<span class="hljs-built_in">cin</span> &gt;&gt; id_str;
+		<span class="hljs-keyword">if</span> (!regex_match(id_str, int_type)) {
+			<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"第"</span> &lt;&lt; i+<span class="hljs-number">2</span> &lt;&lt; <span class="hljs-string">"个数请输入正整数！"</span>;
+			<span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+		}
+		id = stoi(id_str);
+		<span class="hljs-keyword">if</span> (id % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) {
+			qA.EnQueue(id);
+		}
+		<span class="hljs-keyword">else</span>
+			qB.EnQueue(id);
+	}
+	tq.a = qA;
+	tq.b = qB;
+	<span class="hljs-keyword">return</span> tq;
+}
+</div></code></pre>
+<br>
+<h4 id="ostreamfun">OstreamFun</h4>
+<p>OstreamFun is used to output the correct order, it pass in a <code>TwoQueues</code> structure, which contains two queues. Using a <code>while(true)</code> or <code>for(;;)</code> circulation to simulate time.</p>
+<center>
+    <img src="../pictures/T5_ostreamfun.png" width="60%">
+</center>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OstreamFun</span><span class="hljs-params">(TwoQueues tq)</span>
+</span>{
+	Queue&lt;<span class="hljs-keyword">int</span>&gt; qA = tq.a;     
+	Queue&lt;<span class="hljs-keyword">int</span>&gt; qB = tq.b;
+	<span class="hljs-comment">//qC is used to print(just make the code more perceptual)</span>
+	Queue&lt;<span class="hljs-keyword">int</span>&gt; qC;
+	<span class="hljs-keyword">int</span> data;
+	<span class="hljs-keyword">int</span> time = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">for</span> (; ; ) {
+		++time;
+		<span class="hljs-keyword">if</span> (!qA.isEmpty()) {
+			data = qA.DeQueue();
+			qC.EnQueue(data);
+		}
+		<span class="hljs-keyword">if</span>(!qB.isEmpty()&amp;&amp;time%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>) {
+			data = qB.DeQueue();
+			qC.EnQueue(data);
+		}
+		<span class="hljs-keyword">if</span> (qA.isEmpty() &amp;&amp; qB.isEmpty())
+			<span class="hljs-keyword">break</span>;
+	}
+	qC.<span class="hljs-built_in">print</span>();
+}
+
+</div></code></pre>
+<br>
+<h4 id="main-function">main function</h4>
+<p>main function just need to call these two functions:</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+   TwoQueues t = IstreamFun();
+   OstreamFun(t);
+}
+</div></code></pre>
+<br>
+<h3 id="test">Test</h3>
+<h4 id="normal-test-window-a-has-more-people">Normal test (window A has more people)</h4>
+<p><code>Input</code>:
+<code>8 2 1 3 9 4 11 13 15</code></p>
+<p><code>Expected Result</code>:
+<code>1 3 2 9 11 4 13 15</code></p>
+<p><code>Actual Result</code>:</p>
+<img src="../pictures/T5_test1.jpg" width="80%" />
+<br>
+<h4 id="normal-test-window-b-has-more-people">Normal test (window B has more people)</h4>
+<p><code>Input</code>:
+<code>8 2 1 3 9 4 11 12 16</code></p>
+<p><code>Expected Result</code>:
+<code>1 3 2 9 11 4 12 16</code></p>
+<p><code>Actual Result</code>:</p>
+<img src="../pictures/T5_test2.jpg" width="80%" />
+<br>
+<h4 id="n--1">N = 1</h4>
+<p><code>Input</code>:
+<code>1 6</code></p>
+<p><code>Expected Result</code>:
+<code>6</code></p>
+<p><code>Actual Result</code>:</p>
+<img src="../pictures/T5_test3.jpg" width="80%" />
+<br>
+<h4 id="first-number-is-not-a-int-type">First number is not a int type</h4>
+<p><code>Input</code>:
+<code>2.3 3 5</code></p>
+<p><code>Expected Result</code>:
+<code>show error information</code></p>
+<p><code>Actual Result</code>:</p>
+<img src="../pictures/T5_test4.jpg" width="80%" />
+<br>
+<br>
+<p><code>Input</code>:
+<code>wyc 456</code></p>
+<p><code>Expected Result</code>:
+<code>show error information</code></p>
+<p><code>Actual Result</code>:</p>
+<img src="../pictures/T5_test5.jpg" width="80%" />
+<br>
+<h4 id="following-number-is-not-a-int-type">Following number is not a int type</h4>
+<p><code>Input</code>:
+<code>4 2 3.4 7 1</code></p>
+<p><code>Expected Result</code>:
+<code>show error information</code></p>
+<p><code>Actual Result</code>:</p>
+<img src="..\pictures/pictures/T5_test6.jpg" width="80%" />
+<br>
+
+</body>
+</html>
